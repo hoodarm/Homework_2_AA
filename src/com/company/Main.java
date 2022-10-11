@@ -9,7 +9,12 @@ public class Main
         String[] students = {"Alissa", "Ben", "Charlie", "Dianna"};
         String[] grades = {"B", "D", "B", "A"};
         String name = "Dianna";
-        System.out.println(GradeFinder(students, grades, name));
+
+        //Binary search
+        System.out.println(BinaryGradeFinder(students, grades, name));
+
+        //Sequential search
+        System.out.println(SequentialGradeFinder(students, grades, name));
 
         //using classes and objects
         GradeFinder[] students2 = new GradeFinder[4];
@@ -18,10 +23,15 @@ public class Main
         students2[2] = new GradeFinder("Charlie", "B");
         students2[3] = new GradeFinder("Dianna", "A");
         String name2 = "Charlie";
-        System.out.println(ClassGradeFinder(students2, name2));
+
+        //Binary search
+        System.out.println(BinaryClassGradeFinder(students2, name2));
+
+        //Sequential search
+        System.out.println(SequentialClassGradeFinder(students2, name2));
     }
 
-    static String GradeFinder(String[] a, String[] b, String name)
+    static String BinaryGradeFinder(String[] a, String[] b, String name)
     {
         int lo = 0, hi = a.length - 1;
         while (lo <= hi)
@@ -42,7 +52,7 @@ public class Main
         return ("Name not found");
     }
 
-    static String ClassGradeFinder(GradeFinder[] studentInfo, String name)
+    static String BinaryClassGradeFinder(GradeFinder[] studentInfo, String name)
     {
         int lo = 0, hi = studentInfo.length - 1;
         while (lo <= hi)
@@ -63,12 +73,36 @@ public class Main
         return ("Name not found");
     }
 
+    static String SequentialGradeFinder(String[] a, String[] b, String name)
+    {
+        for (int i = 0; i < a.length; i++)
+        {
+            if (a[i].equals(name))
+            {
+                return b[i];
+            }
+        }
+        return ("Name not found");
+    }
+
+    static String SequentialClassGradeFinder(GradeFinder[] studentInfo, String name)
+    {
+        for (GradeFinder gradeFinder : studentInfo)
+        {
+            if (gradeFinder.name.equals(name))
+            {
+                return gradeFinder.grade;
+            }
+        }
+        return ("Name not found");
+    }
 }
 
 class GradeFinder
 {
     String name;
     String grade;
+
     GradeFinder(String name, String grade)
     {
         this.name = name;
